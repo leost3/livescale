@@ -1,0 +1,86 @@
+body {
+  display: flex;
+  flex-direction: column;
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  background: black;
+  position: relative;
+  overflow-y: hidden;
+  transition: all 1s;
+}
+#div1 {
+  position: absolute;
+  top: -50%;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, pink, pink, white);
+  transition: all 0.8s;
+}
+#div2 {
+  position: absolute;
+  transform: translate(0, 50%);
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, darkblue, darkblue, black);
+  transition: all 0.8s;
+  /* z-index: 10; */
+}
+
+.button {
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-top: 7.5px darkblue solid;
+  border-left: 7.5px darkblue solid;
+  border-bottom: 2px pink solid;
+  border-right: 2px pink solid;
+  transition: all 0.8s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.innerButton {
+  width: 25px;
+  height: 25px;
+  z-index: 100;
+  border: 3px solid darkblue;
+
+  background: white;
+  border-radius: 50%;
+  transition: all 1s;
+}
+
+.button:hover .innerButton {
+  background: darkblue;
+}
+.button.active {
+  transform: translate(-50%, -50%) rotate(65deg);
+  /* border-bottom-left-radius: 25px; */
+}
+
+.bottomDivActive {
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+}
+.topDivActive {
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.hasIndex {
+  z-index: 10;
+  transition: all 2s;
+}
