@@ -17,8 +17,26 @@ window.onload = () => {
 btn.addEventListener('touchstart', e => {
   console.log('down');
   isMouseDown = true;
+  let touch = e.touches[0];
   btn.classList.add('active');
-  initialClickedPosition = e.pageY - btn.offsetTop;
+  initialClickedPosition = touch.pageY - btn.offsetTop;
+  btn.addEventListener('touchmove', e => {
+    e.preventDefault();
+    // console.log('moving');
+    e.target.classList.add('active');
+    // if button was neved clicked mousemove doest nothing
+    if (!isMouseDown) return;
+    const cursorPosition = touch.pageY - e.target.offsetTop;
+    const distanceMoved = cursorPosition - initialClickedPosition;
+    console.log(distanceMoved.toFixed(2));
+    // Drags down buttom
+    if (distanceMoved > 5) {
+      moveButtonDown();
+      // Drags up buttom
+    } else if (distanceMoved < -5) {
+      moveButtonUp();
+    }
+  });
 });
 
 btn.addEventListener('touchend', () => {
@@ -29,26 +47,8 @@ btn.addEventListener('touchcancel', () => {
   isMouseDown = false;
   btn.classList.remove('active');
 });
-btn.addEventListener('touchmove', e => {
-  btn.classList.add('active');
-  // if button was neved clicked mousemove doest nothing
-  if (!isMouseDown) return;
-  e.preventDefault();
-
-  const cursorPosition = e.pageY - btn.offsetTop;
-  const distanceMoved = cursorPosition - initialClickedPosition;
-
-  // Drags down buttom
-  if (distanceMoved > 15) {
-    moveButtonDown();
-    // Drags up buttom
-  } else if (distanceMoved < -15) {
-    moveButtonUp();
-  }
-});
 
 const moveButtonDown = () => {
-  console.log('moved down');
   btn.style.top = '60%';
   divTop.classList.add('hasIndex');
   divTop.style.transform = 'translateY(10%)';
@@ -60,7 +60,6 @@ const moveButtonDown = () => {
 };
 
 const moveButtonUp = () => {
-  console.log('moved up');
   btn.style.top = '40%';
   divTop.classList.remove('hasIndex');
   divTop.style.transform = 'translateY(0%)';
